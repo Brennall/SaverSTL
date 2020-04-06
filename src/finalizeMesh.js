@@ -52,7 +52,7 @@ finalizeMesh.prototype = {
                                     geometry.morphAttributes.position[mt].getY(i),
                                     geometry.morphAttributes.position[mt].getZ(i));
 
-                                tempMorph.addScaledVector(morph.sub(morphVector), geometry.morphTargetInfluences[mt]);
+                                tempMorph = morph;
                                 tempMorph.applyMatrix4(mesh.matrixWorld).applyMatrix4(mrot).applyMatrix4(msca);
                             }
                             morphVector.add(tempMorph);

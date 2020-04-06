@@ -97,8 +97,8 @@ finalizeMesh.prototype = {
                                 //the inverse takes the vector into local bone space
                                 //which is then transformed to the appropriate world space
                                 tempVector.applyMatrix4(inverses[k])
-                                    .applyMatrix4(skinMatrices[k])
-                                    .applyMatrix4(mrot).applyMatrix4(msca);
+                                    .applyMatrix4(skinMatrices[k]);
+                                    // .applyMatrix4(mrot).applyMatrix4(msca);
                                 finalVector.add(tempVector);
                             }
                         }

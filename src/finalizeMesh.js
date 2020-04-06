@@ -52,7 +52,7 @@ finalizeMesh.prototype = {
                                     geometry.morphAttributes.position[mt].getY(i),
                                     geometry.morphAttributes.position[mt].getZ(i));
 
-                                tempMorph.addScaledVector(morph.sub(morphVector), geometry.morphTargetInfluences[mt]);
+                                // tempMorph.addScaledVector(morph.sub(morphVector), geometry.morphTargetInfluences[mt]);
                             }
                             morphVector.add(tempMorph);
                         }

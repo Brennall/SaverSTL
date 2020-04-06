@@ -37,23 +37,11 @@ finalizeMesh.prototype = {
                         vertex.applyMatrix4(mesh.matrixWorld).applyMatrix4(mrot).applyMatrix4(msca);
                         newGeometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
                     } else {
+
                         var finalVector = new Vector4();
 
-                        // Without Expression???!?
-                        if (geometry.morphTargets !== 'undefined') {
-                            var morphVector = new Vector4(vector.x, vector.y, vector.z);
-
-                            for (var mt = 0; mt < geometry.morphTargets.length; mt++) {
-                                //not pretty, but it gets the job done - jc
-                                morphVector.lerp(new Vector4(morphMatricesX[mt], morphMatricesY[mt], morphMatricesZ[mt], 1), morphMatricesInfluence[mt]);
-                            }
-                        }
-                        
-                        /*
                         if (geometry.morphTargetInfluences !== undefined) {
-
                             var morphVector = new Vector4(vertex.x, vertex.y, vertex.z);
-                            var tempMorph = new Vector4();
 
                             for (var mt = 0; mt < geometry.morphAttributes.position.length; mt++) {
                                 if (geometry.morphTargetInfluences[mt] == 0) continue;
@@ -62,14 +50,11 @@ finalizeMesh.prototype = {
                                 var morph = new Vector4(
                                     geometry.morphAttributes.position[mt].getX(i),
                                     geometry.morphAttributes.position[mt].getY(i),
-                                    geometry.morphAttributes.position[mt].getZ(i));
+                                    geometry.morphAttributes.position[mt].getZ(i), 1);
 
-                                tempMorph.addScaledVector(morph.sub(morphVector), geometry.morphTargetInfluences[mt]);
-                                tempMorph.applyMatrix4(mesh.matrixWorld).applyMatrix4(mrot).applyMatrix4(msca);
+                                morphVector.add(morph);
                             }
-                            morphVector.add(tempMorph);
                         }
-                        */
 
                         for (var si = 0; si < geometry.skinIndexNames.length; si++) {
 

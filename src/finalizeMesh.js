@@ -38,6 +38,18 @@ finalizeMesh.prototype = {
                         newGeometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
                     } else {
                         var finalVector = new Vector4();
+
+                        // Without Expression???!?
+                        if (geometry.morphTargets !== 'undefined') {
+                            var morphVector = new THREE.Vector4(vector.x, vector.y, vector.z);
+
+                            for (var mt = 0; mt < geometry.morphTargets.length; mt++) {
+                                //not pretty, but it gets the job done - jc
+                                morphVector.lerp(new THREE.Vector4(morphMatricesX[mt], morphMatricesY[mt], morphMatricesZ[mt], 1), morphMatricesInfluence[mt]);
+                            }
+                        }
+                        
+                        /*
                         if (geometry.morphTargetInfluences !== undefined) {
 
                             var morphVector = new Vector4(vertex.x, vertex.y, vertex.z);
@@ -57,6 +69,7 @@ finalizeMesh.prototype = {
                             }
                             morphVector.add(tempMorph);
                         }
+                        */
 
                         for (var si = 0; si < geometry.skinIndexNames.length; si++) {
 

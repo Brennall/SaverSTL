@@ -34,7 +34,7 @@ finalizeMesh.prototype = {
 
                     if (geometry.skinIndexNames == undefined
                       || geometry.skinIndexNames == 0) {
-                        vertex.applyMatrix4(mesh.matrixWorld); //.applyMatrix4(mrot).applyMatrix4(msca);
+                        vertex.applyMatrix4(mesh.matrixWorld).applyMatrix4(mrot).applyMatrix4(msca);
                         newGeometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
                     } else {
                         var finalVector = new Vector4();
@@ -52,7 +52,8 @@ finalizeMesh.prototype = {
                                     geometry.morphAttributes.position[mt].getY(i),
                                     geometry.morphAttributes.position[mt].getZ(i));
 
-                                // tempMorph.addScaledVector(morph.sub(morphVector), geometry.morphTargetInfluences[mt]);
+                                tempMorph.addScaledVector(morph.sub(morphVector), geometry.morphTargetInfluences[mt]);
+                                tempMorph.applyMatrix4(mesh.matrixWorld).applyMatrix4(mrot).applyMatrix4(msca);
                             }
                             morphVector.add(tempMorph);
                         }
@@ -97,8 +98,8 @@ finalizeMesh.prototype = {
                                 //the inverse takes the vector into local bone space
                                 //which is then transformed to the appropriate world space
                                 tempVector.applyMatrix4(inverses[k])
-                                    .applyMatrix4(skinMatrices[k]);
-                                    // .applyMatrix4(mrot).applyMatrix4(msca);
+                                    .applyMatrix4(skinMatrices[k])
+                                    .applyMatrix4(mrot).applyMatrix4(msca);
                                 finalVector.add(tempVector);
                             }
                         }

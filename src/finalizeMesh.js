@@ -34,7 +34,7 @@ finalizeMesh.prototype = {
 
                     if (geometry.skinIndexNames == undefined
                       || geometry.skinIndexNames == 0) {
-                        vertex.applyMatrix4(mesh.matrixWorld).applyMatrix4(mrot).applyMatrix4(msca);
+                        vertex.applyMatrix4(mesh.matrixWorld); //.applyMatrix4(mrot).applyMatrix4(msca);
                         newGeometry.attributes.position.setXYZ(i, vertex.x, vertex.y, vertex.z);
                     } else {
                         var finalVector = new Vector4();
